@@ -1,6 +1,6 @@
 import galleryItems from "./gallery-items.js";
 
-// Создание и рендер разметки по массиву данных и предоставленному шаблону.
+
 
 function createListItems(itemsList) {
   return itemsList.reduce((acc, item, idx) => {
@@ -33,13 +33,6 @@ let imgIndex;
 galleryListRef.addEventListener("click", onOpenModal);
 closeBtnRef.addEventListener("click", onCloseModal);
 
-/*
- - Реализация делегирования на галерее ul.js-gallery
-   и получение url большого изображения.
- - Открытие модального окна по клику на элементе галереи.
- - Подмена значения атрибута src элемента img.lightbox__image.
-*/
-
 function onOpenModal(event) {
   overlayRef.addEventListener("click", onOverlayClick);
   window.addEventListener("keydown", onPressKey);
@@ -48,33 +41,21 @@ function onOpenModal(event) {
   imgModalRef.src = event.target.dataset.source;
   imgIndex = Number(event.target.dataset.index);
   lightboxRef.classList.add("is-open");
-}
-
-/*  - Закрытие модального окна по клику 
-      на кнопку button[data-action="close-lightbox"].
-    - Очистка значения атрибута src элемента img.lightbox__image
-*/
+};
 
 function onCloseModal() {
   overlayRef.removeEventListener("click", onOverlayClick);
   window.removeEventListener("keydown", onPressKey);
   lightboxRef.classList.remove("is-open");
   imgModalRef.src = "";
-}
+};
 
-//  Закрытие модального окна по клику на div.lightbox__overlay.
 
 function onOverlayClick(event) {
   if (event.target === event.currentTarget) {
     onCloseModal();
   }
 }
-
-/* 
-   -  Закрытие модального окна по нажатию клавиши ESC.
-   -  Пролистывание изображений галереи в открытом модальном окне 
-      клавишами "влево" и "вправо" 
-*/
 
 function onPressKey(event) {
   event.preventDefault();
